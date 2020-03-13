@@ -1,0 +1,6 @@
+{
+    "package_name": "net.web-glasses.testing",
+    "title": "Unit Testing App",
+    "description": "This app is used to check if the unit tests are working fine.",
+    "entry": "./"
+}

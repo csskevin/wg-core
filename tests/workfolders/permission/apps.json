@@ -1,0 +1,28 @@
+[
+   {
+      "id": "100",
+      "permissions": [
+         "permission_one",
+         "permission_second"
+      ],
+      "package_name": "default",
+      "title": "Title",
+      "description": "Description",
+      "entry": "./",
+      "special": [
+         "special_one"
+      ]
+   },
+   {
+      "id": "200",
+      "permissions": [
+         "permission_second",
+         "permission_third"
+      ],
+      "package_name": "default2",
+      "title": "Title2",
+      "description": "Description2",
+      "entry": "./",
+      "special": []
+   }
+]
