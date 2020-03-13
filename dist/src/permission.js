@@ -4,9 +4,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var Apps_1 = __importDefault(require("./Apps"));
+/**
+ * Permission system for the applications.
+ */
 var Permission = /** @class */ (function () {
     function Permission() {
     }
+    /**
+     * Reads all permissions of an application given by the ID.
+     * @param app_id The ID of the application.
+     */
     Permission.prototype.getPermissions = function (app_id) {
         var app = Apps_1.default.getAppByProperty("id", app_id);
         if (app.id !== false) {
@@ -16,10 +23,20 @@ var Permission = /** @class */ (function () {
         }
         return [];
     };
+    /**
+     * Checks if an application has a specific permission.
+     * @param app_id The ID of the application.
+     * @param permission The specific permission.
+     */
     Permission.prototype.hasSpecificPermission = function (app_id, permission) {
         var permissions = this.getPermissions(app_id);
         return permissions.includes(permission);
     };
+    /**
+     * Grants an application a permission.
+     * @param app_id The ID of the application.
+     * @param permission The permission, which should be granted.
+     */
     Permission.prototype.grantPermission = function (app_id, permission) {
         var app = Apps_1.default.getAppByProperty("id", app_id);
         if (app) {
@@ -34,6 +51,11 @@ var Permission = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * Revokes an application a permission.
+     * @param app_id The ID of the application.
+     * @param permission The permission, which should be revoked.
+     */
     Permission.prototype.revokePermission = function (app_id, permission) {
         var app = Apps_1.default.getAppByProperty("id", app_id);
         if (app) {
@@ -48,6 +70,11 @@ var Permission = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * Grants a special permission to an application. ONLY one application can have a special permission at once.
+     * @param app_id The ID of the application.
+     * @param permission The special permission, which should be granted.
+     */
     Permission.prototype.grantSpecialPermission = function (app_id, permission) {
         var apps = Apps_1.default.getApps();
         apps.map(function (app) {
@@ -62,6 +89,10 @@ var Permission = /** @class */ (function () {
         Apps_1.default.updateAll(apps);
         return true;
     };
+    /**
+     * Returns the application, which has an special permission.
+     * @param special_permission The special permission, which should be filtered.
+     */
     Permission.prototype.getAppWithSpecialPermission = function (special_permission) {
         var apps = Apps_1.default.getApps();
         var found_apps = apps.filter(function (app) { return app.special.includes(special_permission); });
@@ -70,6 +101,11 @@ var Permission = /** @class */ (function () {
         }
         return { id: false };
     };
+    /**
+     * Checks if an application has a specific special permission.
+     * @param app_id The ID of the application.
+     * @param special_permission The special permission, which should be checked against.
+     */
     Permission.prototype.isSpecialApp = function (app_id, special_permission) {
         var app = this.getAppWithSpecialPermission(special_permission);
         return app.id === app_id;

@@ -12,9 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = __importStar(require("fs"));
 var workfolder_1 = __importDefault(require("./workfolder"));
+/**
+ * File management for the applications.
+ */
 var Files = /** @class */ (function () {
     function Files() {
     }
+    /**
+     * Synchronously writes data to a file, replacing the file if it already exists.
+     * @param app_name The name of the app, where the file should be written to.
+     * @param filepath The relative file path.
+     * @param content The new content of the file.
+     */
     Files.prototype.writeFile = function (app_name, filepath, content) {
         var legit_path = this.getLegitFilePath(app_name, filepath);
         if (legit_path) {
@@ -24,18 +33,25 @@ var Files = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * Synchronously reads the entire contents of a file.
+     * @param app_name The name of the app, where the file should be read of.
+     * @param filepath The relative file path.
+     */
     Files.prototype.readFile = function (app_name, filepath) {
         var legit_path = this.getLegitFilePath(app_name, filepath);
-        if (legit_path) {
-            try {
-                return legit_path;
-            }
-            catch (e) {
-                return null;
-            }
+        if (legit_path && fs.existsSync(legit_path)) {
+            return this.__handleError(function (legit_path) {
+                fs.readFileSync(legit_path);
+            }.bind(this, legit_path));
         }
         return false;
     };
+    /**
+     * Synchronous unlink - delete a name and possibly the file it refers to.
+     * @param app_name The name of the app, where the file should be unlinked of.
+     * @param filepath The relative file path.
+     */
     Files.prototype.unlinkFile = function (app_name, filepath) {
         var legit_path = this.getLegitFilePath(app_name, filepath);
         if (legit_path && fs.existsSync(legit_path)) {
@@ -45,6 +61,11 @@ var Files = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * Synchronous mkdir - create a directory.
+     * @param app_name The name of the app, where the directory should be created.
+     * @param filepath The relative file path.
+     */
     Files.prototype.mkdir = function (app_name, filepath) {
         var legit_path = this.getLegitFilePath(app_name, filepath);
         if (legit_path) {
@@ -54,6 +75,11 @@ var Files = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * Synchronous rmdir - delete a directory.
+     * @param app_name The name of the app, where the directory should be deleted.
+     * @param filepath The relative file path.
+     */
     Files.prototype.rmdir = function (app_name, filepath) {
         var legit_path = this.getLegitFilePath(app_name, filepath);
         if (legit_path) {
@@ -63,6 +89,11 @@ var Files = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * Checks if the filepath is valid and if the filepath stays within the application's folder.
+     * @param app_name The name of the app.
+     * @param relative_filepath The relative filepath, which should be modified.
+     */
     Files.prototype.getLegitFilePath = function (app_name, relative_filepath) {
         var filepath = workfolder_1.default.app_path + "/" + app_name + "/" + relative_filepath;
         var filepath_parts = filepath.split("/");
@@ -86,6 +117,10 @@ var Files = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * Executes an callback function and catches an error, if thrown.
+     * @param cb The callback function, which will be executed.
+     */
     Files.prototype.__handleError = function (cb) {
         try {
             cb();

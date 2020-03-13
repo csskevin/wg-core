@@ -5,9 +5,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var apps_1 = __importDefault(require("./apps"));
 var permission_1 = __importDefault(require("./permission"));
+/**
+ * Verifies incoming express requests.
+ */
 var Verification = /** @class */ (function () {
     function Verification() {
     }
+    /**
+     * Returns an app based on the subdomain.
+     * @param request Express Request object.
+     */
     Verification.prototype.getAppBySubdomain = function (request) {
         var subdomains = request.subdomains;
         if (subdomains.length === 1) {

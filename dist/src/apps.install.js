@@ -9,10 +9,17 @@ var axios_1 = __importDefault(require("axios"));
 var crypto_1 = __importDefault(require("crypto"));
 var fs_1 = __importDefault(require("fs"));
 var workfolder_1 = __importDefault(require("./workfolder"));
+/**
+ * Handles installations of a new application.
+ */
 var AppsInstall = /** @class */ (function () {
     function AppsInstall() {
         this.user_config = "wg-app.json";
     }
+    /**
+     * Installs an app into the configuration file and extracts the content to the workfolder.
+     * @param pathname The full path or a valid URL to the zip archived app.
+     */
     AppsInstall.prototype.installApp = function (pathname) {
         return new Promise(function (resolve, reject) {
             if (fs_1.default.existsSync(pathname)) {
@@ -36,6 +43,10 @@ var AppsInstall = /** @class */ (function () {
             }
         }.bind(this));
     };
+    /**
+     * Checks if a given string is a valid URL.
+     * @param url The URL to check.
+     */
     AppsInstall.prototype.isValidURL = function (url) {
         var pattern = new RegExp('^(https?:\\/\\/)?' + // protocol
             '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
@@ -45,6 +56,10 @@ var AppsInstall = /** @class */ (function () {
             '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
         return !!pattern.test(url);
     };
+    /**
+     * Installs an application. The app_content must be a buffer of an ZIP archive.
+     * @param app_content The app content as buffer.
+     */
     AppsInstall.prototype.installAppByBuffer = function (app_content) {
         var _this = this;
         try {
@@ -77,6 +92,10 @@ var AppsInstall = /** @class */ (function () {
             return e;
         }
     };
+    /**
+     * Generates an configuration file based on the config located in the ZIP archive.
+     * @param config_file The configuration file of the ZIP archive.
+     */
     AppsInstall.prototype.generateAppConfiguration = function (config_file) {
         try {
             var raw_config_content = config_file.getData().toString();
@@ -95,6 +114,9 @@ var AppsInstall = /** @class */ (function () {
             return e;
         }
     };
+    /**
+     * Generates an unique id for the new installed application.
+     */
     AppsInstall.prototype.getUniqueId = function () {
         var app_ids = apps_1.default.getApps().map(function (app) { return app.id; });
         var unique_id = "";
@@ -103,6 +125,10 @@ var AppsInstall = /** @class */ (function () {
         } while (app_ids.includes(unique_id));
         return unique_id;
     };
+    /**
+     * Installs the configuration file of the app into the workfolder.
+     * @param app_config A valid app configuration.
+     */
     AppsInstall.prototype.installAppConfiguration = function (app_config) {
         if (apps_1.default.getAppByProperty("package_name", app_config.package_name).id == false &&
             app_config.id !== false &&
@@ -111,6 +137,11 @@ var AppsInstall = /** @class */ (function () {
         }
         return false;
     };
+    /**
+     * Extracts the application of the ZIP archive to a directory. The configuration won't be exported.
+     * @param zip The application in form of a ZIP archive.
+     * @param app_config The application config.
+     */
     AppsInstall.prototype.extractAppContentWithoutConfigurationFile = function (zip, app_config) {
         zip.deleteFile(this.user_config);
         try {

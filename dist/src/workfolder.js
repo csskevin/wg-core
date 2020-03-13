@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs = require("fs");
+/**
+ * Handles the Work Folder.
+ */
 var WorkFolder = /** @class */ (function () {
     function WorkFolder() {
         this.homedir = '';
@@ -11,6 +14,10 @@ var WorkFolder = /** @class */ (function () {
         var default_homedir = require('os').homedir() + '/.web-glasses';
         this.setHomeDirectory(default_homedir);
     }
+    /**
+     * Sets the new home directory of the project.
+     * @param homedir The new home directory of the project.
+     */
     WorkFolder.prototype.setHomeDirectory = function (homedir) {
         this.homedir = homedir;
         this.app_path = this.homedir + '/apps';
@@ -31,6 +38,9 @@ var WorkFolder = /** @class */ (function () {
             fs.writeFileSync(this.client_config, JSON.stringify({}));
         }
     };
+    /**
+     * Reading the application configuration.
+     */
     WorkFolder.prototype.readAppConfig = function () {
         if (fs.existsSync(this.app_config_file)) {
             var content = fs.readFileSync(this.app_config_file).toString();
@@ -42,6 +52,10 @@ var WorkFolder = /** @class */ (function () {
         }
         return [];
     };
+    /**
+     * Writes the new configuration file into the application configuration.
+     * @param config The new configuration.
+     */
     WorkFolder.prototype.writeAppConfig = function (config) {
         try {
             fs.writeFileSync(this.app_config_file, config);
