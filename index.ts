@@ -6,9 +6,6 @@ import Verification from "./src/verification";
 import Workfolder from "./src/workfolder";
 import Driver from "./src/driver";
 
-import App from "./src/interfaces/app";
-import Service from "./src/interfaces/service";
-
 export {
     Apps,
     Files,
@@ -16,7 +13,5 @@ export {
     Services,
     Verification,
     Workfolder,
-    Driver,
-    App,
-    Service
+    Driver
 }
