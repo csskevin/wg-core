@@ -15,3 +15,5 @@ var verification_1 = __importDefault(require("./src/verification"));
 exports.Verification = verification_1.default;
 var workfolder_1 = __importDefault(require("./src/workfolder"));
 exports.Workfolder = workfolder_1.default;
+var driver_1 = __importDefault(require("./src/driver"));
+exports.Driver = driver_1.default;
