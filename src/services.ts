@@ -9,7 +9,7 @@ class Services {
      * Returns all dependencies of the current project.
      */
     getDependencies(): Array<string> {
-        const package_json = require("../package.json");
+        const package_json = require(process.cwd() + "/package.json");
         if (typeof package_json === 'object') {
             if (Object.keys(package_json).includes("dependencies")) {
                 const dependencies = Object.keys(package_json.dependencies);
