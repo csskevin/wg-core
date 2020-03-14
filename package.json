@@ -1,6 +1,6 @@
 {
   "name": "wg-core",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Core for the Web-Glasses project.",
   "repository": {
     "type": "git",
@@ -11,7 +11,8 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "docs": "typedoc --out ./docs --mode file --exclude **/*.spec.ts src/"
+    "docs": "typedoc --out ./docs --mode file --exclude **/*.spec.ts src/",
+    "production": "npm run test && npm run build && npm run docs"
   },
   "keywords": [
     "web-glasses"
