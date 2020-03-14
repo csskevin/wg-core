@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>wg-core</title>
+	<title>Service | wg-core</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">wg-core</a>
+					<a href="../index.html" class="title">wg-core</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,82 +53,150 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="globals.html">Globals</a>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="service.html">Service</a>
 				</li>
 			</ul>
-			<h1>wg-core</h1>
+			<h1>Interface Service</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#webglasses-core" id="webglasses-core" style="color: inherit; text-decoration: none;">
-					<h1>WebGlasses Core</h1>
-				</a>
-				<p><img src="https://img.shields.io/npm/l/wg-core" alt="NPM">
-					<img src="https://img.shields.io/github/release-date/csskevin/wg-core" alt="GitHub Release Date">
-				<a href="https://travis-ci.com/csskevin/wg-core"><img src="https://travis-ci.com/csskevin/wg-core.svg?branch=master" alt="Build Status"></a></p>
-				<p>This package is the core of the <a href="https://github.com/csskevin/web-glasses">web-glasses</a> project. It includes the fundamentals of the concept. Currently there are seven primary classes.</p>
-				<ul>
-					<li>Apps</li>
-					<li>Driver</li>
-					<li>Files</li>
-					<li>Permission</li>
-					<li>Services</li>
-					<li>Verification</li>
-					<li>Workfolder</li>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Service</span>
+					</li>
 				</ul>
-				<p>The Driver class is the most important class for plugin developers. With this class you can extend the web-glasses project with your own services.</p>
-				<p>Check out the documentation in the <code>docs</code> folder.</p>
-			</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="service.html#handler" class="tsd-kind-icon">handler</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="service.html#method" class="tsd-kind-icon">method</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="service.html#parser" class="tsd-kind-icon">parser</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="service.html#path" class="tsd-kind-icon">path</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="handler" class="tsd-anchor"></a>
+					<h3>handler</h3>
+					<div class="tsd-signature tsd-kind-icon">handler<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RequestParamHandler</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in interfaces/service.ts:7</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="method" class="tsd-anchor"></a>
+					<h3>method</h3>
+					<div class="tsd-signature tsd-kind-icon">method<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"checkout"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"copy"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"delete"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"get"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"head"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"lock"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"merge"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"mkactivity"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"mkcol"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"move"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"m-search"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"notify"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"options"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"patch"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"post"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"purge"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"put"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"report"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"search"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"subscribe"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"trace"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"unlock"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"unsubscribe"</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in interfaces/service.ts:4</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="parser" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> parser</h3>
+					<div class="tsd-signature tsd-kind-icon">parser<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in interfaces/service.ts:6</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="path" class="tsd-anchor"></a>
+					<h3>path</h3>
+					<div class="tsd-signature tsd-kind-icon">path<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in interfaces/service.ts:5</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-class">
-						<a href="classes/apps.html" class="tsd-kind-icon">Apps</a>
+						<a href="../classes/apps.html" class="tsd-kind-icon">Apps</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/appsinstall.html" class="tsd-kind-icon">Apps<wbr>Install</a>
+						<a href="../classes/appsinstall.html" class="tsd-kind-icon">Apps<wbr>Install</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/driver.html" class="tsd-kind-icon">Driver</a>
+						<a href="../classes/driver.html" class="tsd-kind-icon">Driver</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/files.html" class="tsd-kind-icon">Files</a>
+						<a href="../classes/files.html" class="tsd-kind-icon">Files</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/permission.html" class="tsd-kind-icon">Permission</a>
+						<a href="../classes/permission.html" class="tsd-kind-icon">Permission</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/services.html" class="tsd-kind-icon">Services</a>
+						<a href="../classes/services.html" class="tsd-kind-icon">Services</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/verification.html" class="tsd-kind-icon">Verification</a>
+						<a href="../classes/verification.html" class="tsd-kind-icon">Verification</a>
 					</li>
 					<li class=" tsd-kind-class">
-						<a href="classes/workfolder.html" class="tsd-kind-icon">Work<wbr>Folder</a>
+						<a href="../classes/workfolder.html" class="tsd-kind-icon">Work<wbr>Folder</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/app.html" class="tsd-kind-icon">App</a>
+						<a href="app.html" class="tsd-kind-icon">App</a>
 					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/service.html" class="tsd-kind-icon">Service</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface">
+						<a href="service.html" class="tsd-kind-icon">Service</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="service.html#handler" class="tsd-kind-icon">handler</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="service.html#method" class="tsd-kind-icon">method</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="service.html#parser" class="tsd-kind-icon">parser</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="service.html#path" class="tsd-kind-icon">path</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-variable">
+						<a href="../globals.html#fs" class="tsd-kind-icon">fs</a>
 					</li>
 					<li class=" tsd-kind-variable">
-						<a href="globals.html#fs" class="tsd-kind-icon">fs</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#npm" class="tsd-kind-icon">npm</a>
+						<a href="../globals.html#npm" class="tsd-kind-icon">npm</a>
 					</li>
 				</ul>
 			</nav>
@@ -199,7 +267,7 @@
 	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>
