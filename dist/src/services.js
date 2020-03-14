@@ -11,7 +11,7 @@ var Services = /** @class */ (function () {
      * Returns all dependencies of the current project.
      */
     Services.prototype.getDependencies = function () {
-        var package_json = require("../package.json");
+        var package_json = require(process.cwd() + "/package.json");
         if (typeof package_json === 'object') {
             if (Object.keys(package_json).includes("dependencies")) {
                 var dependencies = Object.keys(package_json.dependencies);
