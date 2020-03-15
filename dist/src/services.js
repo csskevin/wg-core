@@ -32,7 +32,8 @@ var Services = /** @class */ (function () {
      * @param dependency The dependency, which should be required.
      */
     Services.prototype.getRequiredDependency = function (dependency) {
-        var services = require(dependency);
+        var required_service = require(dependency);
+        var services = required_service.default || required_service;
         if (Array.isArray(services)) {
             return services.filter(this.isInstanceOfService);
         }

@@ -32,7 +32,8 @@ class Services {
      * @param dependency The dependency, which should be required.
      */
     getRequiredDependency(dependency: string): Array<Service> {
-        const services = require(dependency);
+        const required_service = require(dependency);
+        const services = required_service.default || required_service;
         if(Array.isArray(services))
         {
             return services.filter(this.isInstanceOfService);
