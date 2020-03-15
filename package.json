@@ -11,8 +11,7 @@
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "docs": "typedoc --out ./docs --mode file --exclude **/*.spec.ts src/",
-    "production": "npm run test && npm run build && npm run docs"
+    "docs": "typedoc --out ./docs --mode file --exclude **/*.spec.ts src/"
   },
   "keywords": [
     "web-glasses"
