@@ -14,4 +14,4 @@ This package is the core of the [web-glasses](https://github.com/csskevin/web-gl
 
 The Driver class is the most important class for plugin developers. With this class you can extend the web-glasses project with your own services.
 
-Check out the documentation in the `docs` folder.
+Check out the documentation in the `docs` folder by running `npm run docs`.
