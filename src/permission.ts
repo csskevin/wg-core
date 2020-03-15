@@ -1,4 +1,4 @@
-import Apps from "./Apps";
+import Apps from "./apps";
 import App from "./interfaces/app";
 
 /**
