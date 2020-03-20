@@ -8,6 +8,14 @@ import WorkFolder from "./workfolder";
  */
 class Apps {
     /**
+     * Holds the functions of the event listeners
+     */
+    private listeners: Array<{
+        event: "install" | "uninstall",
+        callback: Function
+    }> = [];
+
+    /**
      * Returns a list of all installed apps.
      */
     getApps(): Array<App> {
@@ -109,7 +117,12 @@ class Apps {
      * @param pathname The full path or a valid URL to the zip archived app.
      */
     installApp(pathname: string): Promise<Function> {
-        return AppInstall.installApp(pathname);
+        return new Promise((resolve: Function, reject: Function) => {
+            AppInstall.installApp(pathname).then(data => {
+                this.fire("install");
+                resolve(data);
+            }).catch(error => reject(error));
+        });
     }
 
     /**
@@ -128,9 +141,22 @@ class Apps {
             const new_apps = apps.filter(app => app.package_name !== app_name);
             const raw_new_apps = JSON.stringify(new_apps, null, 3);
             WorkFolder.writeAppConfig(raw_new_apps);
+            this.fire("uninstall");
             return true;
         }
         return false;
+    }
+
+    on(event: "install" | "uninstall", callback: Function): void {
+        this.listeners.push({event, callback});
+    }
+
+    off(event: "install" | "uninstall", callback: Function): void {
+        this.listeners = this.listeners.filter(item => item.event !== event && item.callback !== callback);
+    }
+
+    private fire(event: "install" | "uninstall"): void {
+        this.listeners.filter(listener => listener.event === event).forEach(listener => listener.callback());
     }
 }
 

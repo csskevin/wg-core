@@ -11,6 +11,10 @@ var workfolder_1 = __importDefault(require("./workfolder"));
  */
 var Apps = /** @class */ (function () {
     function Apps() {
+        /**
+         * Holds the functions of the event listeners
+         */
+        this.listeners = [];
     }
     /**
      * Returns a list of all installed apps.
@@ -108,7 +112,13 @@ var Apps = /** @class */ (function () {
      * @param pathname The full path or a valid URL to the zip archived app.
      */
     Apps.prototype.installApp = function (pathname) {
-        return apps_install_1.default.installApp(pathname);
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            apps_install_1.default.installApp(pathname).then(function (data) {
+                _this.fire("install");
+                resolve(data);
+            }).catch(function (error) { return reject(error); });
+        });
     };
     /**
      * Removes an app and deletes it from the configuration file and the workfolder.
@@ -126,9 +136,19 @@ var Apps = /** @class */ (function () {
             var new_apps = apps.filter(function (app) { return app.package_name !== app_name; });
             var raw_new_apps = JSON.stringify(new_apps, null, 3);
             workfolder_1.default.writeAppConfig(raw_new_apps);
+            this.fire("uninstall");
             return true;
         }
         return false;
+    };
+    Apps.prototype.on = function (event, callback) {
+        this.listeners.push({ event: event, callback: callback });
+    };
+    Apps.prototype.off = function (event, callback) {
+        this.listeners = this.listeners.filter(function (item) { return item.event !== event && item.callback !== callback; });
+    };
+    Apps.prototype.fire = function (event) {
+        this.listeners.filter(function (listener) { return listener.event === event; }).forEach(function (listener) { return listener.callback(); });
     };
     return Apps;
 }());
