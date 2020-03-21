@@ -29,6 +29,7 @@ var Files = /** @class */ (function () {
         if (legit_path) {
             return this.__handleError(function (legit_path, content) {
                 fs.writeFileSync(legit_path, content);
+                return true;
             }.bind(this, legit_path, content));
         }
         return false;
@@ -42,7 +43,7 @@ var Files = /** @class */ (function () {
         var legit_path = this.getLegitFilePath(app_name, filepath);
         if (legit_path && fs.existsSync(legit_path)) {
             return this.__handleError(function (legit_path) {
-                fs.readFileSync(legit_path);
+                return fs.readFileSync(legit_path).toString();
             }.bind(this, legit_path));
         }
         return false;
@@ -57,6 +58,7 @@ var Files = /** @class */ (function () {
         if (legit_path && fs.existsSync(legit_path)) {
             return this.__handleError(function (legit_path) {
                 fs.unlinkSync(legit_path);
+                return true;
             }.bind(this, legit_path));
         }
         return false;
@@ -71,6 +73,7 @@ var Files = /** @class */ (function () {
         if (legit_path) {
             return this.__handleError(function (legit_path) {
                 fs.mkdirSync(legit_path);
+                return true;
             }.bind(this, legit_path));
         }
         return false;
@@ -85,6 +88,7 @@ var Files = /** @class */ (function () {
         if (legit_path) {
             return this.__handleError(function (legit_path) {
                 fs.rmdirSync(legit_path);
+                return true;
             }.bind(this, legit_path));
         }
         return false;
@@ -123,8 +127,7 @@ var Files = /** @class */ (function () {
      */
     Files.prototype.__handleError = function (cb) {
         try {
-            cb();
-            return true;
+            return cb();
         }
         catch (e) {
             return e.message;

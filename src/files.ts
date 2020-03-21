@@ -16,6 +16,7 @@ class Files {
         if (legit_path) {
             return this.__handleError(function (legit_path: string, content: string) {
                 fs.writeFileSync(legit_path, content);
+                return true;
             }.bind(this, legit_path, content))
         }
         return false;
@@ -30,7 +31,7 @@ class Files {
         var legit_path = this.getLegitFilePath(app_name, filepath);
         if (legit_path && fs.existsSync(legit_path)) {
             return this.__handleError(function (legit_path: string) {
-                fs.readFileSync(legit_path);
+                return fs.readFileSync(legit_path).toString();
             }.bind(this, legit_path))
         }
         return false;
@@ -46,6 +47,7 @@ class Files {
         if (legit_path && fs.existsSync(legit_path)) {
             return this.__handleError(function (legit_path: string) {
                 fs.unlinkSync(legit_path);
+                return true;
             }.bind(this, legit_path))
         }
         return false;
@@ -61,6 +63,7 @@ class Files {
         if (legit_path) {
             return this.__handleError(function (legit_path: string) {
                 fs.mkdirSync(legit_path);
+                return true;
             }.bind(this, legit_path));
         }
         return false;
@@ -76,6 +79,7 @@ class Files {
         if (legit_path) {
             return this.__handleError(function (legit_path: string) {
                 fs.rmdirSync(legit_path);
+                return true;
             }.bind(this, legit_path));
         }
         return false;
@@ -116,8 +120,7 @@ class Files {
      */
     __handleError(cb: Function) {
         try {
-            cb();
-            return true;
+            return cb();
         } catch (e) {
             return e.message;
         }
