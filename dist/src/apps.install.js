@@ -9,6 +9,8 @@ var axios_1 = __importDefault(require("axios"));
 var crypto_1 = __importDefault(require("crypto"));
 var fs_1 = __importDefault(require("fs"));
 var workfolder_1 = __importDefault(require("./workfolder"));
+// Telling axios to use the internal HTTP module.
+axios_1.default.defaults.adapter = require("axios/lib/adapters/http");
 /**
  * Handles installations of a new application.
  */
@@ -17,14 +19,37 @@ var AppsInstall = /** @class */ (function () {
         this.user_config = "wg-app.json";
     }
     /**
+     * Returns the file content of a specific local path.
+     * @param pathname The pathname, where the content should be read.
+     */
+    AppsInstall.prototype.getFileContent = function (pathname) {
+        var content = fs_1.default.readFileSync(pathname);
+        return content;
+    };
+    /**
+     * Returns the file content of a URI.
+     * @param pathname The pathname, where the content should be read.
+     */
+    AppsInstall.prototype.getURIContent = function (pathname) {
+        return new Promise(function (resolve, reject) {
+            axios_1.default.get(pathname, {
+                responseType: "arraybuffer"
+            }).then(function (response) {
+                var content = Buffer.from(response.data);
+                resolve(content);
+            }).catch(function (error) { return reject(error); });
+        });
+    };
+    /**
      * Installs an app into the configuration file and extracts the content to the workfolder.
      * @param pathname The full path or a valid URL to the zip archived app.
      */
     AppsInstall.prototype.installApp = function (pathname) {
         return new Promise(function (resolve, reject) {
+            var _this = this;
             if (fs_1.default.existsSync(pathname)) {
                 try {
-                    var content = fs_1.default.readFileSync(pathname);
+                    var content = this.getFileContent(pathname);
                     var id = this.installAppByBuffer(content);
                     resolve(id);
                 }
@@ -33,10 +58,10 @@ var AppsInstall = /** @class */ (function () {
                 }
             }
             else if (this.isValidURL(pathname)) {
-                axios_1.default.get(pathname).then(function (response) {
-                    var id = this.installAppByBuffer(Buffer.from(response.data));
+                this.getURIContent(pathname).then(function (content) {
+                    var id = _this.installAppByBuffer(content);
                     resolve(id);
-                }.bind(this));
+                }).catch(function (error) { return reject(error); });
             }
             else {
                 reject("Invalid Install path!");
