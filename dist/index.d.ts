@@ -1,5 +1,5 @@
 import Apps from "./src/apps";
-import Files from "./src/files";
+import FileSystem from "./src/filesystem";
 import Permission from "./src/permission";
 import Services from "./src/services";
 import Verification from "./src/verification";
@@ -7,4 +7,4 @@ import Workfolder from "./src/workfolder";
 import Driver from "./src/driver";
 import App from "./src/interfaces/app";
 import Service from "./src/interfaces/service";
-export { Apps, Files, Permission, Services, Verification, Workfolder, Driver, App, Service };
+export { Apps, FileSystem, Permission, Services, Verification, Workfolder, Driver, App, Service };
