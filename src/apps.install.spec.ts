@@ -1,5 +1,5 @@
 import App from "./interfaces/app";
-
+import AdmZip from "adm-zip";
 import Apps from "./apps";
 import AppsInstall from "./apps.install";
 import WorkFolder from "./workfolder";
@@ -8,7 +8,7 @@ import * as fs from "fs";
 const test_home_dir = "./tests/workfolders/apps_install/";
 WorkFolder.setHomeDirectory(test_home_dir);
 
-const test_app_https = "http://store.web-glasses.net/tests/net.web-glasses.testing.zip";
+const test_app_https = "https://github.com/csskevin/wg-core/raw/master/tests/app/net.web-glasses.testing.zip";
 const test_app_local = "./tests/app/net.web-glasses.testing.zip";
 
 test("Testing helper functions", function() {
@@ -71,3 +71,22 @@ test("Testing installing local zip file", function() {
     });
 });
 
+test("Test local file read", function() {
+    const content = AppsInstall.getFileContent(test_app_local);
+    expect(() => { 
+        const zip = new AdmZip(content) 
+        zip.getEntries();
+    }).not.toThrow();
+});
+
+test("Test remote read", function() {
+    return AppsInstall.getURIContent(test_app_https).then(function(content: any) {
+        expect(() => { 
+            const zip = new AdmZip(content) 
+            zip.getEntries();
+        }).not.toThrow();
+    }).catch(function(error) {
+        console.log(error);
+        fail();
+    });
+});

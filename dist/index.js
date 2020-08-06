@@ -5,8 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var apps_1 = __importDefault(require("./src/apps"));
 exports.Apps = apps_1.default;
-var files_1 = __importDefault(require("./src/files"));
-exports.Files = files_1.default;
+var filesystem_1 = __importDefault(require("./src/filesystem"));
+exports.FileSystem = filesystem_1.default;
 var permission_1 = __importDefault(require("./src/permission"));
 exports.Permission = permission_1.default;
 var services_1 = __importDefault(require("./src/services"));

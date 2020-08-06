@@ -7,6 +7,16 @@ import App from "./interfaces/app";
 declare class AppsInstall {
     private user_config;
     /**
+     * Returns the file content of a specific local path.
+     * @param pathname The pathname, where the content should be read.
+     */
+    getFileContent(pathname: string): Buffer;
+    /**
+     * Returns the file content of a URI.
+     * @param pathname The pathname, where the content should be read.
+     */
+    getURIContent(pathname: string): Promise<Function>;
+    /**
      * Installs an app into the configuration file and extracts the content to the workfolder.
      * @param pathname The full path or a valid URL to the zip archived app.
      */

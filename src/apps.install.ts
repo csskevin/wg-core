@@ -6,11 +6,41 @@ import crypto from "crypto";
 import fs from "fs";
 import WorkFolder from "./workfolder";
 
+// Telling axios to use the internal HTTP module.
+Axios.defaults.adapter = require("axios/lib/adapters/http");
+
 /**
  * Handles installations of a new application.
  */
 class AppsInstall {
     private user_config = "wg-app.json";
+
+    /**
+     * Returns the file content of a specific local path.
+     * @param pathname The pathname, where the content should be read.
+     */
+    getFileContent(pathname: string): Buffer {
+        const content = fs.readFileSync(pathname);
+        return content;
+    }
+
+    /**
+     * Returns the file content of a URI.
+     * @param pathname The pathname, where the content should be read.
+     */
+    getURIContent(pathname: string): Promise<Function> {
+        return new Promise((resolve: Function, reject: Function) => {
+            Axios.get(
+                pathname,
+                {
+                    responseType: "arraybuffer"
+                }
+            ).then((response: AxiosResponse) => {
+                const content = Buffer.from(response.data);
+                resolve(content);
+            }).catch(error => reject(error));
+        });
+    }
 
     /**
      * Installs an app into the configuration file and extracts the content to the workfolder.
@@ -20,8 +50,8 @@ class AppsInstall {
         return new Promise(function (this: AppsInstall, resolve: Function, reject: Function) {
             if (fs.existsSync(pathname)) {
                 try {
-                    const content = fs.readFileSync(pathname);
-                    var id = this.installAppByBuffer(content);
+                    const content = this.getFileContent(pathname);
+                    const id = this.installAppByBuffer(content);
                     resolve(id);
                 }
                 catch (e) {
@@ -29,10 +59,10 @@ class AppsInstall {
                 }
             }
             else if (this.isValidURL(pathname)) {
-                Axios.get(pathname).then(function (this: AppsInstall, response: AxiosResponse) {
-                    const id = this.installAppByBuffer(Buffer.from(response.data));
+                this.getURIContent(pathname).then((content: any) => {
+                    const id = this.installAppByBuffer(content);
                     resolve(id);
-                }.bind(this));
+                }).catch(error => reject(error));
             }
             else {
                 reject("Invalid Install path!");

@@ -1,5 +1,5 @@
 import Apps from "./src/apps";
-import Files from "./src/files";
+import FileSystem from "./src/filesystem";
 import Permission from "./src/permission";
 import Services from "./src/services";
 import Verification from "./src/verification";
@@ -10,7 +10,7 @@ import Service from "./src/interfaces/service";
 
 export {
     Apps,
-    Files,
+    FileSystem,
     Permission,
     Services,
     Verification,

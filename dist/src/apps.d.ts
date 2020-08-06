@@ -4,6 +4,10 @@ import App from "./interfaces/app";
  */
 declare class Apps {
     /**
+     * Holds the functions of the event listeners
+     */
+    private listeners;
+    /**
      * Returns a list of all installed apps.
      */
     getApps(): Array<App>;
@@ -44,6 +48,9 @@ declare class Apps {
      * @param app_name The app_name which should be removed.
      */
     uninstallApp(app_name: string): boolean;
+    on(event: "install" | "uninstall", callback: Function): void;
+    off(event: "install" | "uninstall", callback: Function): void;
+    private fire;
 }
 declare const _default: Apps;
 export default _default;

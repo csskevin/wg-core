@@ -22,13 +22,25 @@ test("Remove App", function () {
     const test_home_dir = "./tests/workfolders/apps_uninstall/";
     WorkFolder.setHomeDirectory(test_home_dir);
     const test_app_local = "./tests/app/net.web-glasses.testing.zip";
-    AppsInstall.installApp(test_app_local).then(function () {
+
+    const install_fn = jest.fn();
+    const uninstall_fn = jest.fn();
+    
+    Apps.on("uninstall", uninstall_fn);
+    Apps.off("uninstall", uninstall_fn);
+    
+    Apps.on("install", install_fn);
+    Apps.on("uninstall", uninstall_fn);
+
+    Apps.installApp(test_app_local).then(function () {
         expect(Apps.uninstallApp("net.web-glasses.testing")).toBe(true);
+    
+        expect(uninstall_fn).toHaveBeenCalledTimes(1);
+        expect(install_fn).toHaveBeenCalledTimes(1);
 
         const lignator = require("lignator");
         lignator.remove(test_home_dir);
     }).catch(function (error) {
-        console.log(error);
-        fail();
+        fail(error);
     });
 });
