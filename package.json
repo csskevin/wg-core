@@ -1,6 +1,6 @@
 {
   "name": "wg-core",
-  "version": "0.1.5-alpha0.5",
+  "version": "0.1.5",
   "description": "Core for the Web-Glasses project.",
   "repository": {
     "type": "git",
